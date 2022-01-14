@@ -83,11 +83,30 @@ namespace UStandard
                     double[] v = GetVector(data);
                     double diff = _dh._target[i] - _bigU.GetU(v);
 
+                    //normalization of derrivatives
+                    //int size = _ulist.Count;
+                    //double[] derrivatives = new double[size];
+                    //double normDer = 0.0;
+                    //int countDer = 0;
+                    //for (int k = 0; k < size; ++k)
+                    //{
+                    //    derrivatives[k] = _bigU.GetDerrivative(k, v[k]);
+                    //    if (v[k] > _dh._targetMin && v[k] < _dh._targetMax)
+                    //    {
+                    //        normDer += Math.Pow(derrivatives[k], 4.0);
+                    //        ++countDer;
+                    //    }
+                    //}
+                    //normDer /= countDer;
+                    //normDer = Math.Sqrt(normDer);
+                    ///////////////////////////////
+
                     for (int k = 0; k < _ulist.Count; ++k)
                     {
                         if (v[k] > _dh._targetMin && v[k] < _dh._targetMax)
                         {
                             double derrivative = _bigU.GetDerrivative(k, v[k]);
+                            //_ulist[k].Update(diff / v.Length, data, muLeaves * derrivative / normDer);
                             _ulist[k].Update(diff / v.Length, data, muLeaves * derrivative);
                         }
                     }
@@ -108,7 +127,7 @@ namespace UStandard
 
             _bigU.ShowOperatorLimits();
         }
-
+        
         public double DoTest()
         {
             double RMSE = 0.0;
