@@ -25,7 +25,7 @@ namespace UStandard
             }
 
             km.GenerateInitialOperators(NLeaves, linearBlocksPerRootInput);
-            km.BuildRepresentation(100, 0.05, 0.5);
+            km.BuildRepresentation(100, 0.05, 0.2);
             double testdataError = km.DoTest();
 
             double pearson = km.ComputeCorrelationCoeff();
